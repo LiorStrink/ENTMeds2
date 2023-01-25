@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { medications } from '../data/medications.js';
-
-const MedicationDictionary = () => {
+import { medications } from '../data/medications';
+export default function MedicationDictionary() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState(medications);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    const filteredResults = medications.filter((med) =>
-      med.name.toLowerCase().includes(searchTerm.toLowerCase())
+  useEffect(() => {
+    setSearchResults(
+      medications.filter((medication) =>
+        medication.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     );
-    setResults(filteredResults);
-  };
+  }, [searchTerm]);
 
   return (
     <div>
       <input
         type="text"
         placeholder="Search for a medication"
-        onChange={handleSearch}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
-      {results.map((med) => (
-        <div key={med.name}>
-          <h2>{med.name}</h2>
-          <p>Dosage: {med.dosage}</p>
-          <p>Considerations: {med.considerations}</p>
-        </div>
-      ))}
+      <ul>
+        {searchResults.map((medication) => (
+          <li key={medication.id}>
+            <h3>{medication.name}</h3>
+            <p>{medication.description}</p>
+            <p>Dosage: {medication.dosage}</p>
+            <p>Considirations: {medication.considerations}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
-
-export default MedicationDictionary;
+}

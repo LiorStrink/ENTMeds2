@@ -1,41 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import Papa from 'papaparse';
 
-var firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://DATABASE_NAME.firebaseio.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID",
-  // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-  measurementId: "G-MEASUREMENT_ID",
-};
+export class medications extends React.Component {
+  state = {
+    data: {},
+  };
 
-
-const MedicationList = () => {
-  const [medications, setMedications] = useState([]);
-  useEffect(() => {
-    const db = firebase.firestore();
-    const unsubscribe = db.collection('medications').onSnapshot((snapshot) => {
-      const medicationsData = snapshot.docs.map((doc) => doc.data());
-      setMedications(medicationsData);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  return (
-    <div>
-      <h2>Medication List</h2>
-      <ul>
-        {medications.map((medication) => (
-          <li key={medication.name}>{medication.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-export default MedicationList;
+  componentDidMount() {
+    fetch('/meds.csv')
+      .then((res) => res.text())
+      .then((text) => {
+        const data = Papa.parse(text, {
+          header: true,
+          dynamicTyping: true,
+        }).data;
+        const result = data.reduce((acc, row) => {
+          acc[row.medicationName] = {
+            dosage: row.dosage,
+            description: row.description,
+          };
+          return acc;
+        }, {});
+        this.setState({ data: result });
+      });
+  }
+  render() {
+    return <div>{console.log(this.state.data)}</div>;
+  }
+}
+ //default this.state.data

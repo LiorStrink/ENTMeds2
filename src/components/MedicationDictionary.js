@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { medications } from '../data/medications';
+import MedicationList from '../data/medications_db';
+
 export default function MedicationDictionary() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);

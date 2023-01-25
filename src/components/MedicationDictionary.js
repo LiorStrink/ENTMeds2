@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { medications } from './src/data/medications.js';
+import { medications } from '../data/medications.js';
 
 const MedicationDictionary = () => {
   const [searchTerm, setSearchTerm] = useState('');

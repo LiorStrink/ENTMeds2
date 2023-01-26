@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { medications } from '../data/medications_db';
+import medications from '../data/medications.js';
 import MedicationList from '../data/medications_db';
+console.log(medications);
 
 export default function MedicationDictionary() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  //debug
-  return medications;
-  //
   useEffect(() => {
     setSearchResults(
       medications.filter((medication) =>

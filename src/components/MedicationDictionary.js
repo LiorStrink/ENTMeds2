@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import medications from '../data/medications.js';
+import { Medications } from '../data/medications_db';
 import MedicationList from '../data/medications_db';
-console.log(medications);
+import { Clock } from '../data/medications_db';
+/////
+export default function MedicationDictionary() {
+  //return console.log(<welcome name="Sara" />)
+  return <Medications/>;
+}
+/////
 
+{
+  /*
 export default function MedicationDictionary() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
+    console.log(medications);
     setSearchResults(
       medications.filter((medication) =>
         medication.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,4 +43,7 @@ export default function MedicationDictionary() {
       </ul>
     </div>
   );
+}
+///
+*/
 }

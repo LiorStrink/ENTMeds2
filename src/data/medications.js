@@ -15,3 +15,4 @@ export const medications = [
     considerations: 'Do not take with liver disease',
   },
 ];
+console.log(medications);

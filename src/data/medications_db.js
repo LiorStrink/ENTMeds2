@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-var csvPath = './Meds.csv';
+import {parseCSV2} from './Meds.js'
+
 export class Medications extends React.Component {
   state = { data: {} };
   componentDidMount() {
+    parseCSV2('./Meds.csv')
+  {/*
     fetch(csvPath)
-      .then(console.log(csvPath))
+      .then(console.log(res.text()))
       .then((res) => res.text())
       .then((text) => {
         const data = Papa.parse(text, {
@@ -22,12 +25,13 @@ export class Medications extends React.Component {
         this.setState({ data: result });
         console.log(data);
       });
+    */}
   }
   render() {
     console.log('ffff222');
     return <div>{console.log(this.state.data)}</div>;
   }
-}
+};
 //default this.state.data
 
 export class Clock extends React.Component {
@@ -49,5 +53,4 @@ export class Clock extends React.Component {
     );
   }
 }
-*/
-}
+*/}

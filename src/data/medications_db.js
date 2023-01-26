@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import csvPath from './meds.csv';
-
+import csvPath from './Meds.csv';
+console.log(err);
 export class Medications extends React.Component {
   state = { data: {} };
   componentDidMount() {

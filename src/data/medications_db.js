@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-var csvPath = './Meds.txt';
+var csvPath = './Meds.csv';
 export class Medications extends React.Component {
   state = { data: {} };
   componentDidMount() {
     fetch(csvPath)
+      .then(console.log(csvPath))
       .then((res) => res.text())
       .then((text) => {
-        console.log('22');
         const data = Papa.parse(text, {
           header: true,
           dynamicTyping: true,
